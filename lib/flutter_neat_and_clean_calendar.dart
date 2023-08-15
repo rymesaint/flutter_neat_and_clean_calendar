@@ -117,7 +117,7 @@ class Calendar extends StatefulWidget {
   final String multiDayEndText;
   final Color? eventColor;
   final Color? eventDoneColor;
-  final DateTime? initialDate;
+  final DateTime initialDate;
   final bool isExpanded;
   final List<String> weekDays;
   final String? locale;
@@ -161,7 +161,7 @@ class Calendar extends StatefulWidget {
     this.multiDayEndText = 'End',
     this.eventColor,
     this.eventDoneColor,
-    this.initialDate,
+    required this.initialDate,
     this.isExpanded = false,
     this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     this.locale = 'en_US',
@@ -997,7 +997,7 @@ class _CalendarState extends State<Calendar> {
     }
     // Additional conditions: Only if month or year changed, then call the callback.
     // This avoids double executing the callback when selecting a date in the same month.
-    if (widget.onMonthChanged != null) {
+    if (widget.onMonthChanged != null && day.month != widget.initialDate.month || day.year != widget.initialDate.year) {
       widget.onMonthChanged!(day);
     }
   }
